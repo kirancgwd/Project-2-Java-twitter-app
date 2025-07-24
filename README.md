@@ -5,6 +5,9 @@ Install Required Tools
 Make sure these are installed:
 
 Tool	Download Link
+
 Minikube -	https://minikube.sigs.k8s.io/docs/start/
+
 kubectl	- https://kubernetes.io/docs/tasks/tools/
+
 Docker	- https://www.docker.com/products/docker-desktop
