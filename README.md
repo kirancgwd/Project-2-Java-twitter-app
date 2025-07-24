@@ -63,7 +63,9 @@ This will create a local Kubernetes cluster using a Docker
 
  kubectl get pods -n my-app
  
- **9. Access the App in Browser**
+ **9. Forward the port and Access the App in Browser**
+
+ kubectl port-forward svc/kiran-youtube-app 8082:80 -n my-app
 
     http://localhost:8082/
 
