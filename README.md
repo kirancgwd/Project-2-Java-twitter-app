@@ -1,4 +1,4 @@
-**This Repository gives you the complete, step-by-step guide to set up and deploy your app to Minikube on Windows — including Docker image handling, Kubernetes Deployment, and Service**
+**This Repository gives you the complete, step-by-step guide to set up and deploy your app to Minikube on your Windows local system — including Docker image handling, Kubernetes Deployment, and Service**
 
 1. Install Required Tools
 Make sure these are installed:
