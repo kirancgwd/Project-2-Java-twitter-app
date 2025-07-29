@@ -1,0 +1,4 @@
+[0m[0KError from server (NotFound): configmaps "kubectl" not found[0K
+Error from server (NotFound): configmaps "get" not found[0K
+Error from server (NotFound): configmaps "configmap" not found[0K
+[0K

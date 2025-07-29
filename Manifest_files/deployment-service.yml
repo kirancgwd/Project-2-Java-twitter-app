@@ -1,0 +1,39 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kiran-youtube-app
+  namespace: default
+  labels:
+    app: kiran-youtube-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kiran-youtube-app
+  template:
+    metadata:
+      labels:
+        app: kiran-youtube-app
+    spec:
+      containers:
+      - name: kiran-youtube-app
+        image: "kiranpkdocker/kiran-youtube-app:v2"
+        ports:
+          - containerPort: 8082
+            name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kiran-youtube-app
+  namespace: default
+spec:
+  selector:
+    app: kiran-youtube-app
+  type: NodePort
+  ports:
+  - name: http
+    targetPort: 8082
+    port: 8082
+               

@@ -1,0 +1,6 @@
+kubectl apply -f 01-namespace-monitoring.yaml
+kubectl apply -f 02-prometheus-config.yaml
+kubectl apply -f 03-prometheus-deployment.yaml
+kubectl apply -f 04-prometheus-service.yaml
+kubectl apply -f 05-grafana-deployment.yaml
+kubectl apply -f 06-grafana-service.yaml
