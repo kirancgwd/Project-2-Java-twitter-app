@@ -117,7 +117,7 @@ Goto managed files  --> add new config --> select Global Maven settings.xml --> 
 
 ### **8. Create SonarQube Container**
 ```bash
-sudo docker run -d -p 9000:9000 sonarqube:lts-community
+docker run -d --name sonar -p 9000:9000 --restart=always sonarqube:latest
 ```
 - Login:  
   Username: `admin`  
