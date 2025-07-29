@@ -82,6 +82,36 @@ sudo docker run -d -p 8082:8082 sonatype/nexus3
   cat admin.password
   ```
 - Copy the password (do not include `bash`).
+- Add Nexus URL in pom.xml
+   
+Login to Nexus --> browse --> copy maven releases and maven snapshots ---> paste in URL added in pom.xml
+
+![image](https://github.com/user-attachments/assets/b67c6a9b-7bbe-4109-ae4a-2c9492ba9bbb)
+
+ Edit pom.xml
+
+ ![image](https://github.com/user-attachments/assets/f60c1554-2e75-41d9-ac1a-34d99acec1a0)
+
+- Create gloabl maven configuration in jenkins managed files
+   
+Goto managed files  --> add new config --> select Global Maven settings.xml --> give ID as Global-maven --> add below config under server --> username and password of nexus
+
+```
+-->
+    <server>
+      <id>maven-releases</id>
+      <username>admin</username>
+      <password>kirancgwd</password>
+    </server>
+    
+    <server>
+      <id>maven-snapshots</id>
+      <username>admin</username>
+      <password>kirancgwd</password>
+    </server>
+    -->
+```
+
 
 ---
 
