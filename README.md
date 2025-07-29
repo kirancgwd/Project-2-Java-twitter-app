@@ -1,4 +1,4 @@
-# Java-twitter-App
+# Java-App
 
 **Create an Ubuntu server in AWS for Jenkins, SonarQube, and Nexus**  
 Instance: `t2.large`  
