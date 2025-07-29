@@ -144,17 +144,9 @@ Configure the following tools in Jenkins:
 
 ---
 
-### **11. Create a Pipeline Project**
-- Write a Declarative pipeline script.
+### **11. Create a Pipeline Jenkins**
+- Write a Declarative pipeline script using Jenkinsfile.
 - Ensure tools are defined in the pipeline with names matching the Jenkins configuration.
-
----
-
-### **12. Publish Artifacts to Nexus**
-1. Ensure Jenkins can communicate with Nexus.  
-2. Add Nexus credentials and URL in Jenkins.  
-3. Add Maven repository URLs (`maven-releases` and `maven-snapshots`) to the `pom.xml` file.  
-4. Go to Nexus → Browse → Copy repository URLs → Paste them into the `pom.xml`.
 
 ---
 
