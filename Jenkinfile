@@ -2,7 +2,8 @@ pipeline {
     agent any
      environment{
         SCANNER_HOME= tool 'sonar-scanner'
-    }
+        IMAGE_TAG="v${BUILD_NUMBER}"
+        }
     
     tools {
         maven 'maven3'
@@ -12,7 +13,7 @@ pipeline {
     stages {
         stage('git-checkout') {
             steps {
-                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/kirancgwd/Java-twitter-app.git'
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/kirancgwd/Project-2-java-app.git'
             }
         }
         
@@ -32,35 +33,47 @@ pipeline {
         stage('Sonar Analysis') {
             steps {
                      withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=twitter-app  \
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=project-2-java-app  \
                     -Dsonar.java.binaries=. \
-                    -Dsonar.projectKey=twitter-app  '''
+                    -Dsonar.projectKey=project-2-java-app  '''
                }
             }
                 
+        }
+        stage('File System Scan') {
+            steps {
+               sh "trivy fs --format table -o trivy-fs-report.html ."
+            }
         }
          stage('Build Jar') {
             steps {
                 sh "mvn package"
             }
         }
-         stage('Docker Build') {
+          stage('Docker Build') {
             steps {
                script{
-                   withDockerRegistry(credentialsId: 'docker-login') {
-                    sh "docker build -t  twitter-app:latest . "
-                    sh "docker tag twitter-app:latest kiranpkdocker/twitter-app:latest "
-                    sh "docker push  kiranpkdocker/twitter-app:latest "
-                    sh "docker run -d -p  8081:8080 kiranpkdocker/twitter-app:latest"
+                   withDockerRegistry(credentialsId: 'docker', url: '') {
+                    sh "docker build -t  kiranpkdocker/project-2-java-app:$IMAGE_TAG . "
                  }
                  }
                }
-            
-        }
+             }
          stage('Docker Image Scan') {
             steps {
-               sh "trivy image kiranpkdocker/twitter-app:latest "
+               sh "trivy image --format table -o image-report.html kiranpkdocker/project-2-java-app:$IMAGE_TAG "
             }
         }
+          stage('Docker tag & push') {
+            steps {
+               script{
+                   withDockerRegistry(credentialsId: 'docker') {
+                    sh "docker tag kiranpkdocker/project-2-java-app:$IMAGE_TAG kiranpkdocker/project-2-java-app:$IMAGE_TAG "
+                    sh "docker push  kiranpkdocker/project-2-java-app:$IMAGE_TAG "
+                    sh "docker run -d -p  8082:8082 kiranpkdocker/project-2-java-app:$IMAGE_TAG"
+                 }
+                 }
+               }
+             }
     }
 }
